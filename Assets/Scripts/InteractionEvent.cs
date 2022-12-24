@@ -15,4 +15,9 @@ public class InteractionEvent : MonoBehaviour
         return dialogueEvent.dialogues;
     }
 
+    //public DialogueSelect[] GetDialogueSelects()
+    //{
+    //    SelectEvent.dialogueSelects = DatabaseManager.instance.
+    //}
+
 }
