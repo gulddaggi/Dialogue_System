@@ -5,14 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    [Tooltip("이름")]
-    public string name;
+    [Tooltip("텍스트 ID")]
+    public string text_ID;
 
     [Tooltip("대사")]
     public string[] texts;
 
     [Tooltip("이벤트 ID")]
-    public string[] number;
+    public string[] event_ID;
 
     [Tooltip("반복 여부")]
     public string[] return_num;
@@ -23,18 +23,19 @@ public class Dialogue
 public class DialogueSelect
 {
     [Tooltip("이벤트 ID")]
-    public string[] number;
+    public string event_ID;
+
+    [Tooltip("선택지")]
+    public string[] choices;
 
     [Tooltip("이동 지점")]
-    public string[] return_num;
+    public string[] move_num;
 }
 
 
 [System.Serializable]
 public class DialogueEvent
 {
-    public string name; //이벤트 이름
-
     public Vector2 line; //대사 추출을 위함
     public Dialogue[] dialogues;
 }
@@ -42,8 +43,6 @@ public class DialogueEvent
 [System.Serializable]
 public class SelectEvent
 {
-    public string name; //이벤트 이름
-
     public Vector2 line; //대사 추출을 위함
     public DialogueSelect[] dialogueSelects;
 }

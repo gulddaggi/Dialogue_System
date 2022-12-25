@@ -6,6 +6,8 @@ public class InteractionEvent : MonoBehaviour
 {
     [SerializeField]
     DialogueEvent dialogueEvent;
+    [SerializeField]
+    SelectEvent SelectEvent;
 
     public Dialogue[] GetDialogue()
     {
@@ -15,9 +17,12 @@ public class InteractionEvent : MonoBehaviour
         return dialogueEvent.dialogues;
     }
 
-    //public DialogueSelect[] GetDialogueSelects()
-    //{
-    //    SelectEvent.dialogueSelects = DatabaseManager.instance.
-    //}
+    public DialogueSelect[] GetDialogueSelects()
+    {
+        SelectEvent.dialogueSelects = DatabaseManager.instance.GetDialogueSelects(
+            (int)SelectEvent.line.x, (int)SelectEvent.line.y);
+
+        return SelectEvent.dialogueSelects;
+    }
 
 }

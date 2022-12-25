@@ -19,9 +19,25 @@ public class DatabaseManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+
+            // perser를 통해 파싱된 데이터 전달
             DialogueParser parser = GetComponent<DialogueParser>();
-            Dialogue[] dialogues = parser.Parse(csv_DialogueFileName); // perser를 통해 파싱된 데이터 전달
-            for (int i = 0; i < dialogues.Length; i++) dialogueDic.Add(i + 1, dialogues[i]); // 딕셔너리에 저장. 1색인
+            DialogueSelectParser selectParser = GetComponent<DialogueSelectParser>();
+            Dialogue[] dialogues = parser.Parse(csv_DialogueFileName);
+            DialogueSelect[] dialogueSelects = selectParser.Parse(csv_DialogueSelectFileName);
+
+            // 딕셔너리에 저장. 1색인
+            for (int i = 0; i < dialogues.Length; i++)
+            {
+
+                dialogueDic.Add(i + 1, dialogues[i]); 
+            }
+
+            for(int i = 0; i < dialogueSelects.Length; i++)
+            {
+                dialogueSelectDic.Add(i + 1, dialogueSelects[i]);
+            }
+
             isFinish = true; // 저장 완료.
         }
     }
@@ -34,4 +50,14 @@ public class DatabaseManager : MonoBehaviour
 
         return dialogueList.ToArray();
     }
+
+    public DialogueSelect[] GetDialogueSelects(int _startNum, int _endNum)
+    {
+        List<DialogueSelect> selectList = new List<DialogueSelect>();
+
+        for (int i = 0; i <= _endNum - _startNum; i++) selectList.Add(dialogueSelectDic[_startNum + i]);
+
+        return selectList.ToArray();
+    }
+
 }

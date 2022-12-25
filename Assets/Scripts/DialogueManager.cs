@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         StartDialogue(obj.GetComponent<InteractionEvent>().GetDialogue());
+        obj.GetComponent<InteractionEvent>().GetDialogueSelects();
     }
 
     void Update()
