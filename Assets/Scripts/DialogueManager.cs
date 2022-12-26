@@ -80,12 +80,11 @@ public class DialogueManager : MonoBehaviour
             SelectEventCheck();
             SelectReturnCheck();
 
-            yield return new WaitForSeconds(2f);
-
+            yield return new WaitForSeconds(3.0f);
 
             Debug.Log("pass");
 
-            StartCoroutine(TypeWriter());
+            NextDialogue();
         }
     }
 
@@ -113,6 +112,7 @@ public class DialogueManager : MonoBehaviour
         lineCount = 0;
         dialogues = null;
         canSkip = false;
+        this.gameObject.GetComponent<SceneManage>().LoadPlayScene();
     }
 
     void DialogueCheck()
@@ -121,12 +121,11 @@ public class DialogueManager : MonoBehaviour
         {
             if (canSkip)
             {
-                //스페이스 누르면 스킵
+                //스킵
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     DialogueSkip();
                 }
-
             }
         }
     }
@@ -144,29 +143,39 @@ public class DialogueManager : MonoBehaviour
             //StopCoroutine(TextDisappear());
             //StartCoroutine(TextDisappear());
         }*/
+        StopCoroutine(TypeWriter());
+        NextDialogue();
 
-        canSkip = false;
-        dialogueText.text = "";
+    }
+    
+    void NextDialogue()
+    {
+        if (!isSelectOn)
+        {
+            canSkip = false;
+            dialogueText.text = "";
 
-        if (++contextCount < dialogues[lineCount].texts.Length)
-        {
-            StartCoroutine(TypeWriter());
-        }
-        else
-        {
-            contextCount = 0;
-            if (++lineCount < dialogues.Length)
+            if (++contextCount < dialogues[lineCount].texts.Length)
             {
                 StartCoroutine(TypeWriter());
             }
-            else // 대화 종료
+            else
             {
-                // EndDialogue();
-                // 플레이 씬으로 이동
+                contextCount = 0;
+                if (++lineCount < dialogues.Length)
+                {
+                    cam.transform.eulerAngles = new Vector3(cam.transform.eulerAngles.x, cam.transform.eulerAngles.y + 180.0f, cam.transform.eulerAngles.z);
+                    StartCoroutine(TypeWriter());
+                }
+                else // 대화 종료
+                {
+                    EndDialogue();
+                }
             }
         }
+
     }
-    
+
     IEnumerator TextAppear()
     {
         isTextAppear = true;
