@@ -23,8 +23,8 @@ public class DatabaseManager : MonoBehaviour
             // perser를 통해 파싱된 데이터 전달
             DialogueParser parser = GetComponent<DialogueParser>();
             DialogueSelectParser selectParser = GetComponent<DialogueSelectParser>();
-            Dialogue[] dialogues = parser.Parse(csv_DialogueFileName);
-            DialogueSelect[] dialogueSelects = selectParser.Parse(csv_DialogueSelectFileName);
+            Dialogue[] dialogues = parser.DialogueParse(csv_DialogueFileName);
+            DialogueSelect[] dialogueSelects = selectParser.DialogueSelectParse(csv_DialogueSelectFileName);
 
             // 딕셔너리에 저장. 1색인
             for (int i = 0; i < dialogues.Length; i++)

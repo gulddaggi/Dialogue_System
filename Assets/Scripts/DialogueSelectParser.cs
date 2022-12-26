@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueSelectParser : MonoBehaviour
 {
-    public DialogueSelect[] Parse(string csv_selectFileName)
+    public DialogueSelect[] DialogueSelectParse(string csv_selectFileName)
     {
         List<DialogueSelect> selectList = new List<DialogueSelect>(); // 선택지 리스트. 파싱 데이터 저장
         TextAsset csvData = Resources.Load<TextAsset>(csv_selectFileName); //csv파일 전달받음

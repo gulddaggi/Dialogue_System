@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueParser : MonoBehaviour
 {
-    public Dialogue[] Parse(string _csvFileName)
+    public Dialogue[] DialogueParse(string _csvFileName)
     {
         List<Dialogue> dialogueList = new List<Dialogue>(); // 대화 리스트. 파싱 데이터 저장
         TextAsset csvData = Resources.Load<TextAsset>(_csvFileName); //csv파일 전달받음
